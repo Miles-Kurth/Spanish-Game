@@ -27,7 +27,7 @@ var gameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
         this.canvas.width = canvasWidth;
-        this.canvas.height = cnavasHeight;
+        this.canvas.height = canvasHeight;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.interval = setInterval(updateGameArea, 20);
@@ -63,7 +63,7 @@ function startGame() {
         //Make array somewhere
       }
     }
-    myGamePiece = new component(120, 150, "red", 10, 10);
+    myGamePiece = new component(cardWidth, cardHeight, "red", 10, 10);
 }
 
 startGame();
