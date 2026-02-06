@@ -18,6 +18,7 @@ const numCols = 8; //Horizontal (across)
 const cardWidth = (canvasWidth - (numCols * 10)) / numCols;
 const cardHeight = (canvasHeight - (numRows * 10)) / numRows;
       
+const cardsArray = [];
 
 
 var myGamePiece;
@@ -59,7 +60,6 @@ function updateGameArea() {
 
 function startGame() {
     gameArea.start();
-    const cardsArray = [];
     let targetX = 10;
     let targetY = 10;
     
