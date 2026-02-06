@@ -9,17 +9,25 @@
     <h1>Matching Game</h1>
     <script>
 
+const canvasWidth = 1280;
+const canvasHeight = 480;
       
-const numRows = 3;
-const numCols = 8;
+const numRows = 3; //Vertical (down)
+const numCols = 8; //Horizontal (across)
+
+const cardWidth = (canvasWidth - (numCols * 10)) / numcols;
+const cardHeight = (CanvasHeight - (numRows * 10)) / numRows;
+      
+let targetX = 0;
+let targetY = 0;
 
 var myGamePiece;
 
 var gameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
-        this.canvas.width = 1280;
-        this.canvas.height = 480;
+        this.canvas.width = canvasWidth;
+        this.canvas.height = cnavasHeight;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.interval = setInterval(updateGameArea, 20);
@@ -49,6 +57,12 @@ function updateGameArea() {
 
 function startGame() {
     gameArea.start();
+    
+    for (let r = 0; r < numRows; r++){
+      for (let c = 0; c < numCols; c++){
+        //Make array somewhere
+      }
+    }
     myGamePiece = new component(120, 150, "red", 10, 10);
 }
 
