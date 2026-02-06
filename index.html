@@ -6,8 +6,7 @@
     <style> canvas { border: 2px solid black; } </style>
   </head>
   <body>
-    <h1>Heading</h1>
-    <p1>Paragraph</p1>
+    <h1>Matching Game</h1>
     <script>
 
       
@@ -19,7 +18,7 @@ var myGamePiece;
 var gameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
-        this.canvas.width = 720;
+        this.canvas.width = 1080;
         this.canvas.height = 480;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
