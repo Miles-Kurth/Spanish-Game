@@ -70,12 +70,22 @@ function startGame() {
       targetX = 10;
       for (let c = 0; c < numCols; c++){
         cardsArray.push(new component(cardWidth, cardHeight, "red", targetX, targetY) );
-        cardsArray[r + c].setColor(Math.floor(Math.random() * 16777215));
+        cardsArray[r + c].setColor(getRandomHexColor());
         targetX += cardWidth;
       }
       targetY += cardHeight;
     }
     // myGamePiece = new component(cardWidth, cardHeight, "red", 10, 10);
+}
+
+function getRandomHexColor() {
+  const randomColorInt = Math.floor(Math.random() * 16777215); 
+  let hexColor = randomColorInt.toString(16);
+  // Pad the string with leading zeros if it's less than 6 digits long
+  while (hexColor.length < 6) {
+    hexColor = "0" + hexColor;
+  }
+  return "#" + hexColor;
 }
 
 startGame();
