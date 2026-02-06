@@ -70,10 +70,9 @@ function startGame() {
       targetX = 10;
       for (let c = 0; c < numCols; c++){
         cardsArray.push(new component(cardWidth, cardHeight, getRandomHexColor(), targetX, targetY) );
-        // cardsArray[r + c].setColor(getRandomHexColor());
-        targetX += cardWidth;
+        targetX += cardWidth + 10;
       }
-      targetY += cardHeight;
+      targetY += cardHeight + 10;
     }
     // myGamePiece = new component(cardWidth, cardHeight, "red", 10, 10);
 }
