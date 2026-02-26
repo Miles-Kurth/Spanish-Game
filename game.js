@@ -74,7 +74,7 @@ class Card {
     constructor(width, height, hue, x, y, cardIndex) {
         this.element = document.createElement("canvas");
         this.element.id = cardIndex;
-        console.log(this.id);
+        console.log(this.element.id);
 
         //Size
         this.cardWidth = width;
@@ -119,7 +119,7 @@ class Card {
             //Draw text
             ctx.fillStyle = "#000000";
             ctx.font = "20px monospace";
-            ctx.fillText(this.word, this.x + this.cardWidth/2 - this.wordLength/2, this.y + this.cardHeight/2 + this.textHeight/2 );
+            ctx.fillText(this.word, this.x + this.cardWidth/2 /*- this.wordLength/2*/, this.y + this.cardHeight/2 + this.textHeight/2 );
         }
         this.setColor = function(newColor){
             this.color = newColor;
