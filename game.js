@@ -108,7 +108,8 @@ class Card {
             this.color = new Color("oklch", [this.lightness, this.chroma, this.hue]);
             ctx = gameArea.context;
             ctx.fillStyle = this.color;
-            ctx.roundRect(this.x, this.y, this.cardWidth, this.cardHeight, 20);
+            ctx.beginPath();
+            ctx.roundRect(this.x, this.y, this.cardWidth, this.cardHeight, 15);
             ctx.fill();
 
             //Text setup
