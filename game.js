@@ -97,13 +97,15 @@ class Card {
     this.word = "" + wordsArray[this.wordIndex][this.wordType];
 
 
-
+    //Called every frame
     this.update = function(){
+        //Card
         this.hue = ( (this.hue) % 360 ) + 1 + 0.01;
         this.color = new Color("oklch", [this.lightness, this.chroma, this.hue]);
         ctx = gameArea.context;
         ctx.fillStyle = this.color;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.roundRect(this.x, this.y, this.width, this.height, 20);
+        //Text
         ctx.fillStyle = "#000000";
         ctx.font = "20px monospace";
         ctx.fillText(this.word, this.x + (this.width/2) - (20 * (this.word.length/4)), this.y + (this.height/2) );
@@ -113,59 +115,6 @@ class Card {
     }
     }
 }
-
-
-//DO NOT USE
-function component(width, height, hue, x, y, cardIndex) {
-    this.cardIndex = cardIndex;
-    console.log(this.cardIndex);
-    //From here
-    // canvas : document.createElement("_" + this.cardIndex);
-    
-    // console.log(Array.from( document.getElementsByName("_" + this.cardIndex) )[0]);
-    // Array.from( document.getElementsByName("_" + this.cardIndex) )[0].addEventListener('click', function(){
-    //     console.log(this.cardIndex + " has been clicked");
-    // })
-    //to here
-    
-
-    this.width = width;
-    this.height = height;
-    this.x = x;
-    this.y = y;
-
-    this.lightness = 0.8;
-    this.chroma = 0.09;
-    this.hue = hue % 360;
-
-    this.color = new Color("oklch", [this.lightness, this.chroma, this.hue]);
-
-    this.wordIndex = Math.floor(Math.random() * 12);
-    this.wordType = Math.floor(Math.random() * 2);
-    while (wordsArrayAssignments[this.wordIndex][this.wordType] == -1){
-        this.wordIndex = Math.floor(Math.random() * 12);
-        this.wordType = Math.floor(Math.random() * 2);
-    }
-    wordsArrayAssignments[this.wordIndex][this.wordType] = -1;
-    this.word = "" + wordsArray[this.wordIndex][this.wordType];
-
-
-
-    this.update = function(){
-        this.hue = ( (this.hue) % 360 ) + 1 + 0.01;
-        this.color = new Color("oklch", [this.lightness, this.chroma, this.hue]);
-        ctx = gameArea.context;
-        ctx.fillStyle = this.color;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
-        ctx.fillStyle = "#000000";
-        ctx.font = "20px monospace";
-        ctx.fillText(this.word, this.x + (this.width/2) - (20 * (this.word.length/4)), this.y + (this.height/2) );
-    }
-    this.setColor = function(newColor){
-        this.color = newColor;
-    }
-}
-//DO NOT USE
 
 function updateGameArea() {
     gameArea.clear();
