@@ -75,11 +75,47 @@ class Card {
         this.element = document.createElement("canvas");
         this.element.id = cardIndex;
         console.log(this.id);
+
+        this.width = width;
+    this.height = height;
+    this.x = x;
+    this.y = y;
+
+    this.lightness = 0.8;
+    this.chroma = 0.09;
+    this.hue = hue % 360;
+
+    this.color = new Color("oklch", [this.lightness, this.chroma, this.hue]);
+
+    this.wordIndex = Math.floor(Math.random() * 12);
+    this.wordType = Math.floor(Math.random() * 2);
+    while (wordsArrayAssignments[this.wordIndex][this.wordType] == -1){
+        this.wordIndex = Math.floor(Math.random() * 12);
+        this.wordType = Math.floor(Math.random() * 2);
+    }
+    wordsArrayAssignments[this.wordIndex][this.wordType] = -1;
+    this.word = "" + wordsArray[this.wordIndex][this.wordType];
+
+
+
+    this.update = function(){
+        this.hue = ( (this.hue) % 360 ) + 1 + 0.01;
+        this.color = new Color("oklch", [this.lightness, this.chroma, this.hue]);
+        ctx = gameArea.context;
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.fillStyle = "#000000";
+        ctx.font = "20px monospace";
+        ctx.fillText(this.word, this.x + (this.width/2) - (20 * (this.word.length/4)), this.y + (this.height/2) );
+    }
+    this.setColor = function(newColor){
+        this.color = newColor;
+    }
     }
 }
 
 
-    
+//DO NOT USE
 function component(width, height, hue, x, y, cardIndex) {
     this.cardIndex = cardIndex;
     console.log(this.cardIndex);
@@ -129,6 +165,7 @@ function component(width, height, hue, x, y, cardIndex) {
         this.color = newColor;
     }
 }
+//DO NOT USE
 
 function updateGameArea() {
     gameArea.clear();
