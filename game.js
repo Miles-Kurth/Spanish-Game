@@ -76,43 +76,50 @@ class Card {
         this.element.id = cardIndex;
         console.log(this.id);
 
-        this.width = width;
-    this.height = height;
-    this.x = x;
-    this.y = y;
+        //Size
+        this.cardWidth = width;
+        this.cardHeight = height;
+        this.x = x;
+        this.y = y;
 
-    this.lightness = 0.8;
-    this.chroma = 0.09;
-    this.hue = hue % 360;
-
-    this.color = new Color("oklch", [this.lightness, this.chroma, this.hue]);
-
-    this.wordIndex = Math.floor(Math.random() * 12);
-    this.wordType = Math.floor(Math.random() * 2);
-    while (wordsArrayAssignments[this.wordIndex][this.wordType] == -1){
+        //Color
+        this.lightness = 0.8;
+        this.chroma = 0.09;
+        this.hue = hue % 360;
+        this.color = new Color("oklch", [this.lightness, this.chroma, this.hue]);
+        
+        //Word
         this.wordIndex = Math.floor(Math.random() * 12);
         this.wordType = Math.floor(Math.random() * 2);
-    }
-    wordsArrayAssignments[this.wordIndex][this.wordType] = -1;
-    this.word = "" + wordsArray[this.wordIndex][this.wordType];
+        while (wordsArrayAssignments[this.wordIndex][this.wordType] == -1){
+            this.wordIndex = Math.floor(Math.random() * 12);
+            this.wordType = Math.floor(Math.random() * 2);
+        }
+        wordsArrayAssignments[this.wordIndex][this.wordType] = -1;
+        this.word = "" + wordsArray[this.wordIndex][this.wordType];
+        this.wordLength = this.word.length;
 
-
-    //Called every frame
-    this.update = function(){
-        //Card
-        this.hue = ( (this.hue) % 360 ) + 1 + 0.01;
-        this.color = new Color("oklch", [this.lightness, this.chroma, this.hue]);
-        ctx = gameArea.context;
-        ctx.fillStyle = this.color;
-        ctx.roundRect(this.x, this.y, this.width, this.height, 20);
         //Text
-        ctx.fillStyle = "#000000";
-        ctx.font = "20px monospace";
-        ctx.fillText(this.word, this.x + (this.width/2) - (20 * (this.word.length/4)), this.y + (this.height/2) );
-    }
-    this.setColor = function(newColor){
-        this.color = newColor;
-    }
+        this.textMetrics = ctx.measureText(this.word);
+        this.textHeight = this.textMetrics.actualBoundingBoxAscent + this.textMetrics.actualBoundingBoxDescent;
+        this.textWidth = this.textMetrics.height;
+
+        //Called every frame
+        this.update = function(){
+            //Draw card
+            this.hue = ( (this.hue) % 360 ) + 1 + 0.01;
+            this.color = new Color("oklch", [this.lightness, this.chroma, this.hue]);
+            ctx = gameArea.context;
+            ctx.fillStyle = this.color;
+            ctx.roundRect(this.x, this.y, this.cardWidth, this.height, 20);
+            //Draw text
+            ctx.fillStyle = "#000000";
+            ctx.font = "20px monospace";
+            ctx.fillText(this.word, this.x + this.cardWidth/2 - this.wordLength/4, this.y + this.cardHeight/2 + this.textHeight/2 );
+        }
+        this.setColor = function(newColor){
+            this.color = newColor;
+        }
     }
 }
 
@@ -132,9 +139,7 @@ function startGame() {
     for (let r = 0; r < numRows; r++){
       targetX = 10;
       for (let c = 0; c < numCols; c++){
-        // cardArray.push( new component(cardWidth, cardHeight, startingHue, targetX, targetY, count) );
         cardArray.push( new Card(cardWidth, cardHeight, startingHue, targetX, targetY, count) );
-
         startingHue = ( (startingHue + 5) % 360 ) + 1;
         targetX += cardWidth + 10;
         count++;
