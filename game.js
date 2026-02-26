@@ -130,8 +130,10 @@ class Card {
 
 function updateGameArea() {
     gameArea.clear();
-    for (let i = 0; i < cardArray.length; i++){
-        cardArray[i].update();
+    for (let r = 0; r < cardArray.length; r++){
+        for (int c = 0; c < cardArray[r].length; c++){
+            cardArray[i].update();
+        }
     }
 }
 
