@@ -169,6 +169,12 @@ function getRandomOkLCHColor() {
 
 startGame();
 
+/*TO-DO
+- Make color "pulse" (global variable, increase/derease?)
+-
+*/
+
+
 
 
 
