@@ -85,7 +85,7 @@ class Card {
         //Color
         this.lightness = 0.8;
         this.chroma = 0.09;
-        this.hue = hue % 360;
+        this.hue = (hue + (5 * this.element.id) ) % 360;
         this.color = new Color("oklch", [this.lightness, this.chroma, this.hue]);
         
         //Word
@@ -145,7 +145,7 @@ function startGame() {
       targetX = 10;
       for (let c = 0; c < numCols; c++){
         cardArray.push( new Card(cardWidth, cardHeight, startingHue, targetX, targetY, count) );
-        startingHue = ( (startingHue + 5) % 360 ) + 1;
+        //startingHue = ( (startingHue + 5) % 360 ) + 1;
         targetX += cardWidth + 10;
         count++;
       }
