@@ -9,7 +9,7 @@ const numCols = 8; //Horizontal (across)
 const cardWidth = ((canvasWidth - 10) - (numCols * 10)) / numCols;
 const cardHeight = ((canvasHeight - 10) - (numRows * 10)) / numRows;
       
-let cardArray = [8][3];
+let cardArray = [];
 
 let wordsArray = [
     [1 , "one"   , 0],
@@ -164,3 +164,29 @@ function getRandomOkLCHColor() {
 }
 
 startGame();
+
+
+
+
+
+/*
+function startGame() {
+    gameArea.start();
+    let targetX = 10;
+    let targetY = 10;
+    
+    let count = 0;
+    for (let r = 0; r < numRows; r++){
+      targetX = 10;
+      for (let c = 0; c < numCols; c++){
+        cardArray[r][c] = new Card(cardWidth, cardHeight, startingHue, targetX, targetY, count);
+        //cardArray.push( new Card(cardWidth, cardHeight, startingHue, targetX, targetY, count) );
+        //startingHue = ( (startingHue + 5) % 360 ) + 1;
+        targetX += cardWidth + 10;
+        count++;
+      }
+      targetY += cardHeight + 10;
+    }
+}
+*/
+
