@@ -144,7 +144,7 @@ function startGame() {
     for (let r = 0; r < numRows; r++){
       targetX = 10;
       for (let c = 0; c < numCols; c++){
-        cardArray[r][c] = new Card(cardWidth, cardHeight, startingHue, targetX, targetY, count)
+        cardArray[r][c] = new Card(cardWidth, cardHeight, startingHue, targetX, targetY, count);
         //cardArray.push( new Card(cardWidth, cardHeight, startingHue, targetX, targetY, count) );
         //startingHue = ( (startingHue + 5) % 360 ) + 1;
         targetX += cardWidth + 10;
