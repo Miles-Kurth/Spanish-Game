@@ -99,10 +99,7 @@ class Card {
         this.word = "" + wordsArray[this.wordIndex][this.wordType];
         this.wordLength = this.word.length;
 
-        //Text
-        this.textMetrics = ctx.measureText(this.word);
-        this.textHeight = this.textMetrics.actualBoundingBoxAscent + this.textMetrics.actualBoundingBoxDescent;
-        this.textWidth = this.textMetrics.height;
+        
 
         //Called every frame
         this.update = function(){
@@ -111,11 +108,17 @@ class Card {
             this.color = new Color("oklch", [this.lightness, this.chroma, this.hue]);
             ctx = gameArea.context;
             ctx.fillStyle = this.color;
-            ctx.roundRect(this.x, this.y, this.cardWidth, this.height, 20);
+            ctx.roundRect(this.x, this.y, this.cardWidth, this.cardHeight, 20);
+
+            //Text setup
+            this.textMetrics = ctx.measureText(this.word);
+            this.textHeight = this.textMetrics.actualBoundingBoxAscent + this.textMetrics.actualBoundingBoxDescent;
+            this.textWidth = this.textMetrics.height;
+            
             //Draw text
             ctx.fillStyle = "#000000";
             ctx.font = "20px monospace";
-            ctx.fillText(this.word, this.x + this.cardWidth/2 - this.wordLength/4, this.y + this.cardHeight/2 + this.textHeight/2 );
+            ctx.fillText(this.word, this.x + this.cardWidth/2 - this.wordLength/2, this.y + this.cardHeight/2 + this.textHeight/2 );
         }
         this.setColor = function(newColor){
             this.color = newColor;
