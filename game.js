@@ -71,7 +71,7 @@ var gameArea = {
 }
 
 class Card {
-    constructor(width, height, hue, x, y, cardIndex) {
+    constructor(width, height, hue, x, y, cardIndex, row, column) {
         this.element = document.createElement("canvas");
         this.element.id = cardIndex;
         console.log(this.element.id);
@@ -81,11 +81,13 @@ class Card {
         this.cardHeight = height;
         this.x = x;
         this.y = y;
+        this.row = row;
+        this.col = column;
 
         //Color
         this.lightness = 0.8;
         this.chroma = 0.09;
-        this.hue = (hue + (5 * this.element.id) ) % 360;
+        this.hue = (hue + (5 * (this.row + this.col)) ) % 360;
         this.color = new Color("oklch", [this.lightness, this.chroma, this.hue]);
         
         //Word
@@ -147,7 +149,7 @@ function startGame() {
       targetX = 10;
       let arrayRow = [];
       for (let c = 0; c < numCols; c++){
-        arrayRow.push( new Card(cardWidth, cardHeight, startingHue, targetX, targetY, count) );
+        arrayRow.push( new Card(cardWidth, cardHeight, startingHue, targetX, targetY, count, r, c) );
         //startingHue = ( (startingHue + 5) % 360 ) + 1;
         targetX += cardWidth + 10;
         count++;
