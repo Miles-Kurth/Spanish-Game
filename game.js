@@ -109,12 +109,13 @@ class Card {
             ctx = gameArea.context;
             ctx.fillStyle = this.color;
             ctx.roundRect(this.x, this.y, this.cardWidth, this.cardHeight, 20);
+            ctx.fill();
 
             //Text setup
             this.textMetrics = ctx.measureText(this.word);
             this.textHeight = this.textMetrics.actualBoundingBoxAscent + this.textMetrics.actualBoundingBoxDescent;
             this.textWidth = this.textMetrics.height;
-            
+
             //Draw text
             ctx.fillStyle = "#000000";
             ctx.font = "20px monospace";
