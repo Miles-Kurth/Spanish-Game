@@ -70,6 +70,15 @@ var gameArea = {
     }
 }
 
+class Card {
+    constructor(width, height, hue, x, y, cardIndex) {
+        this.element = createElement("div");
+        this.element.id = cardIndex;
+        console.log(this.id);
+    }
+}
+
+
     
 function component(width, height, hue, x, y, cardIndex) {
     this.cardIndex = cardIndex;
@@ -82,8 +91,7 @@ function component(width, height, hue, x, y, cardIndex) {
     //     console.log(this.cardIndex + " has been clicked");
     // })
     //to here
-    this.element = createElement("div");
-    this.element.id = 
+    
 
     this.width = width;
     this.height = height;
@@ -138,7 +146,9 @@ function startGame() {
     for (let r = 0; r < numRows; r++){
       targetX = 10;
       for (let c = 0; c < numCols; c++){
-        cardArray.push( new component(cardWidth, cardHeight, startingHue, targetX, targetY, count) );
+        // cardArray.push( new component(cardWidth, cardHeight, startingHue, targetX, targetY, count) );
+        cardArray.push( new Card(cardWidth, cardHeight, startingHue, targetX, targetY, count) );
+
         startingHue = ( (startingHue + 5) % 360 ) + 1;
         targetX += cardWidth + 10;
         count++;
