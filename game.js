@@ -87,7 +87,7 @@ class Card {
         //Color
         this.lightness = 0.8;
         this.chroma = 0.09;
-        this.hue = (hue + (5 * (this.row + this.col)) ) % 360;
+        this.hue = (hue + (10 * (this.row + this.col)) ) % 360;
         this.color = new Color("oklch", [this.lightness, this.chroma, this.hue]);
         
         //Word
