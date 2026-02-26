@@ -72,7 +72,7 @@ var gameArea = {
 
 class Card {
     constructor(width, height, hue, x, y, cardIndex) {
-        this.element = createElement("div");
+        this.element = document.createElement("canvas");
         this.element.id = cardIndex;
         console.log(this.id);
     }
