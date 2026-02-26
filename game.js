@@ -9,7 +9,7 @@ const numCols = 8; //Horizontal (across)
 const cardWidth = ((canvasWidth - 10) - (numCols * 10)) / numCols;
 const cardHeight = ((canvasHeight - 10) - (numRows * 10)) / numRows;
       
-const cardArray = [8][3];
+let cardArray = [8][3];
 
 let wordsArray = [
     [1 , "one"   , 0],
@@ -143,13 +143,14 @@ function startGame() {
     let count = 0;
     for (let r = 0; r < numRows; r++){
       targetX = 10;
+      let arrayRow = [];
       for (let c = 0; c < numCols; c++){
-        cardArray[r][c] = new Card(cardWidth, cardHeight, startingHue, targetX, targetY, count);
-        //cardArray.push( new Card(cardWidth, cardHeight, startingHue, targetX, targetY, count) );
+        arrayRow.push( new Card(cardWidth, cardHeight, startingHue, targetX, targetY, count) );
         //startingHue = ( (startingHue + 5) % 360 ) + 1;
         targetX += cardWidth + 10;
         count++;
       }
+      cardArray.push(arrayRow);
       targetY += cardHeight + 10;
     }
 }
