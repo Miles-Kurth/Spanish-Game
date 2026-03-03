@@ -109,7 +109,7 @@ class Card {
         //Called every frame
         this.update = function(){
             //Color
-            this.hue = ( (this.hue) % 360 ) + 1 + globalHueChange;
+            this.hue = ( (this.hue) % 360 ) - globalHueChange;
             this.color = new Color("oklch", [this.lightness, this.chroma, this.hue]);
 
             //Draw card
