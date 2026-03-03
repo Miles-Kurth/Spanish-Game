@@ -182,8 +182,8 @@ function getRandomOkLCHColor() {
 startGame();
 
 /*TO-DO
-- Make color "pulse" (global variable, increase/derease?)
--
+- Detect mouse over, highlight card
+- Detect click
 */
 
 
