@@ -109,7 +109,7 @@ class Card {
         //Called every frame
         this.update = function(){
             //Color
-            this.hue = ( (this.hue) % 360 ) - globalHueChange;
+            this.hue = ( (this.hue) % 360 ) - 0.5 - globalHueChange;
             this.color = new Color("oklch", [this.lightness, this.chroma, this.hue]);
 
             //Draw card
@@ -143,7 +143,11 @@ function updateGameArea() {
             cardArray[r][c].update();
         }
     }
-    globalHueChange = Math.cosh(time - 10);
+    updateGlobalHue();
+}
+
+function updateGlobalHue() {
+    globalHueChange = 1/(Math.cosh(time - 10)) * 0.5;
     time = (time + 0.01) % 20;
 }
 
