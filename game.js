@@ -100,6 +100,7 @@ class Card {
         wordsArrayAssignments[this.wordIndex][this.wordType] = -1;
         this.word = "" + wordsArray[this.wordIndex][this.wordType];
         this.wordLength = this.word.length;
+        this.element.style.textAlign = 'center';
 
         
 
@@ -108,7 +109,7 @@ class Card {
             //Color
             this.hue = ( (this.hue) % 360 ) + 1 + 0.01;
             this.color = new Color("oklch", [this.lightness, this.chroma, this.hue]);
-            
+
             //Draw card
             ctx = gameArea.context;
             ctx.fillStyle = this.color;
