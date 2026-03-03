@@ -52,6 +52,9 @@ for (let i = 0; i < wordsArray.length; i++){
 var startingHue = Math.floor(Math.random() * 360) + 1;
 var ctx;
 
+let globalHueChange = 0;
+let time = 0;
+
 var gameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
@@ -106,7 +109,7 @@ class Card {
         //Called every frame
         this.update = function(){
             //Color
-            this.hue = ( (this.hue) % 360 ) + 1 + 0.01;
+            this.hue = ( (this.hue) % 360 ) + 1 + globalHueChange;
             this.color = new Color("oklch", [this.lightness, this.chroma, this.hue]);
 
             //Draw card
@@ -125,7 +128,7 @@ class Card {
             ctx.textAlign = "center";
             ctx.fillStyle = "#000000";
             ctx.font = "20px monospace";
-            ctx.fillText(this.word, this.x + this.cardWidth/2, this.y + this.cardHeight/2);
+            ctx.fillText(this.word, this.x + this.cardWidth/2, this.y + this.cardHeight/2 + this.textHeight/2);
         }
         this.setColor = function(newColor){
             this.color = newColor;
@@ -140,6 +143,8 @@ function updateGameArea() {
             cardArray[r][c].update();
         }
     }
+    globalHueChange = (0.05*Math.sin(time)) % Math.PI;
+    time += 0.01;
 }
 
 function startGame() {
