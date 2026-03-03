@@ -111,7 +111,6 @@ class Card {
 
             //Draw card
             ctx = gameArea.context;
-            ctx.textAlign = "center";
             ctx.fillStyle = this.color;
             ctx.beginPath();
             ctx.roundRect(this.x, this.y, this.cardWidth, this.cardHeight, 15);
@@ -123,9 +122,10 @@ class Card {
             this.textWidth = this.textMetrics.height;
 
             //Draw text
+            ctx.textAlign = "center";
             ctx.fillStyle = "#000000";
             ctx.font = "20px monospace";
-            ctx.fillText(this.word, this.x + this.cardWidth/2 - this.wordLength*20/3.5, this.y + this.cardHeight/2 + this.textHeight/2 );
+            ctx.fillText(this.word, this.x + this.cardWidth/2, this.y + this.cardHeight/2);
         }
         this.setColor = function(newColor){
             this.color = newColor;
