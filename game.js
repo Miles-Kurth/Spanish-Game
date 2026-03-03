@@ -143,8 +143,8 @@ function updateGameArea() {
             cardArray[r][c].update();
         }
     }
-    globalHueChange = (0.05*Math.sin(time)) % Math.PI;
-    time += 0.01;
+    globalHueChange = Math.cosh(time - 10);
+    time = (time + 0.01) % 20;
 }
 
 function startGame() {
