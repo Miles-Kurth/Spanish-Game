@@ -100,7 +100,6 @@ class Card {
         wordsArrayAssignments[this.wordIndex][this.wordType] = -1;
         this.word = "" + wordsArray[this.wordIndex][this.wordType];
         this.wordLength = this.word.length;
-        this.element.style.textAlign = 'center';
 
         
 
@@ -112,6 +111,7 @@ class Card {
 
             //Draw card
             ctx = gameArea.context;
+            ctx.textAlign = "center";
             ctx.fillStyle = this.color;
             ctx.beginPath();
             ctx.roundRect(this.x, this.y, this.cardWidth, this.cardHeight, 15);
