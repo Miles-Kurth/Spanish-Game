@@ -136,11 +136,10 @@ class Card {
             ctx.fill();  
 
             if (this.mouseOverCard) {
-                ctx.lineWidth = 5;
-                ctx.strokeStyle = "black";
+                ctx.lineWidth = 3;
+                ctx.strokeStyle = "white";
                 ctx.stroke();
             }
-
 
             //Text setup
             this.textMetrics = ctx.measureText(this.word);
@@ -159,7 +158,7 @@ class Card {
         }
 
         this.handleClick = function() {
-            this.mouseOverCard = !this.mouseOverCard;
+            // this.mouseOverCard = !this.mouseOverCard;
             console.log("Card clicked: ", this.word);
         }
 
