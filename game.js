@@ -147,7 +147,7 @@ function updateGameArea() {
 }
 
 function updateGlobalHue() {
-    globalHueChange = 1/(Math.cosh(time - 10)) * 0.5;
+    globalHueChange = 1/(Math.cosh(time - 10)) * 1;
     time = (time + 0.01) % 20;
 }
 
