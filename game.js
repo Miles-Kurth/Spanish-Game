@@ -156,6 +156,7 @@ class Card {
         }
         this.setHoverState = function(b) {
             this.mouseOverCard = b;
+            console.log("Card: ", this.word);
         }
 
         this.handleClick = function() {
