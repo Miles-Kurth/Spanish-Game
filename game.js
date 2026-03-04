@@ -94,15 +94,15 @@ class Card {
         this.element = document.createElement("canvas");
         this.element.id = this.cardIndex;
         console.log(this.element.id);
-        document.body.appendChild(this.element);
+        // document.body.appendChild(this.element);
 
-        this.element.addEventListener("mouseenter", function() {
-            mouseOverCard = true;
-            console.log(this.cardIndex + " on");
-        });
-        this.element.addEventListener("mouseleave", function() {
-            mouseOverCard = false;
-        });
+        // this.element.addEventListener("mouseenter", function() {
+        //     mouseOverCard = true;
+        //     console.log(this.cardIndex + " on");
+        // });
+        // this.element.addEventListener("mouseleave", function() {
+        //     mouseOverCard = false;
+        // });
 
         //Size
         this.cardWidth = width;
@@ -163,9 +163,51 @@ class Card {
             ctx.font = "20px monospace";
             ctx.fillText(this.word, this.x + this.cardWidth/2, this.y + this.cardHeight/2 + this.textHeight/2);
         }
-        this.setColor = function(newColor){
-            this.color = newColor;
+        this.handleClick = function() {
+            this.mouseOverCard = !this.mouseOverCard;
+            console.log("Card clicked: ", this.word);
         }
+
+        this.containsPoint = function(px, py) {
+            const r = 15; // same radius you use in roundRect
+            const x = this.x;
+            const y = this.y;
+            const w = this.cardWidth;
+            const h = this.cardHeight;
+
+            // 1️⃣ First: quick reject (outside bounding box)
+            if (px < x || px > x + w || py < y || py > y + h) {
+                return false;
+            }
+
+            // 2️⃣ Check central rectangle (no corner areas)
+            if (
+                (px >= x + r && px <= x + w - r) ||
+                (py >= y + r && py <= y + h - r)
+            ) {
+                return true;
+            }
+
+            // 3️⃣ Check the four corner circles
+            const corners = [
+                { cx: x + r,     cy: y + r },         // top-left
+                { cx: x + w - r, cy: y + r },         // top-right
+                { cx: x + r,     cy: y + h - r },     // bottom-left
+                { cx: x + w - r, cy: y + h - r }      // bottom-right
+            ];
+
+            for (let corner of corners) {
+                const dx = px - corner.cx;
+                const dy = py - corner.cy;
+                if (dx * dx + dy * dy <= r * r) {
+                    return true;
+                }
+            }
+
+            return false;
+        };
+    
+    
     }
 }
 
@@ -177,6 +219,22 @@ function updateGameArea() {
         }
     }
     updateGlobalHue();
+    this.canvas.addEventListener("click", function(e) {
+        const rect = gameArea.canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        for (let r = 0; r < cardArray.length; r++){
+            for (let c = 0; c < cardArray[r].length; c++){
+                let card = cardArray[r][c];
+
+                if (card.containsPoint(mouseX, mouseY)) {
+                    card.handleClick();
+                    return; // stop after first hit
+                }
+            }
+        }
+    });
 }
 
 function updateGlobalHue() {
