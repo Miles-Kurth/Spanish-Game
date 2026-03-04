@@ -135,13 +135,13 @@ class Card {
             ctx.roundRect(this.x, this.y, this.cardWidth, this.cardHeight, 15);
             ctx.fill();  
 
-            if (mouseOverCard) {
+            if (this.mouseOverCard) {
                 ctx.lineWidth = 5;
                 ctx.strokeStyle = "black";
                 ctx.stroke();
             }
 
-            
+
             //Text setup
             this.textMetrics = ctx.measureText(this.word);
             this.textHeight = this.textMetrics.actualBoundingBoxAscent + this.textMetrics.actualBoundingBoxDescent;
