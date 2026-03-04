@@ -105,12 +105,12 @@ class Card {
         this.wordLength = this.word.length;
         
         //Card
-        this.ctx = gameArea.context;
+        ctx = gameArea.context;
         this.element.addEventListener("mouseenter", function() {
             ctx.style.border = "2px solid red";
         });
         this.element.addEventListener("mouseleave", function() {
-        this.ctx.style.border = "none";
+        ctx.style.border = "none";
         });
         
         
@@ -122,10 +122,10 @@ class Card {
             this.color = new Color("oklch", [this.lightness, this.chroma, this.hue]);
 
             //Draw card
-            this.ctx.fillStyle = this.color;
-            this.ctx.beginPath();
-            this.ctx.roundRect(this.x, this.y, this.cardWidth, this.cardHeight, 15);
-            this.ctx.fill();
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.roundRect(this.x, this.y, this.cardWidth, this.cardHeight, 15);
+            ctx.fill();
 
             
 
@@ -136,10 +136,10 @@ class Card {
             this.textWidth = this.textMetrics.height;
 
             //Draw text
-            this.ctx.textAlign = "center";
-            this.ctx.fillStyle = "#000000";
-            this.ctx.font = "20px monospace";
-            this.ctx.fillText(this.word, this.x + this.cardWidth/2, this.y + this.cardHeight/2 + this.textHeight/2);
+            ctx.textAlign = "center";
+            ctx.fillStyle = "#000000";
+            ctx.font = "20px monospace";
+            ctx.fillText(this.word, this.x + this.cardWidth/2, this.y + this.cardHeight/2 + this.textHeight/2);
         }
         this.setColor = function(newColor){
             this.color = newColor;
