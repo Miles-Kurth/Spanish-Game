@@ -121,10 +121,10 @@ class Card {
             ctx.roundRect(this.x, this.y, this.cardWidth, this.cardHeight, 15);
             ctx.fill();
 
-            this.element.addEventListener('mouseenter', function() {
+            this.element.addEventListener("mouseenter", function() {
             ctx.style.border = "2px solid red";
             });
-            this.element.addEventListener('mouseleave', function() {
+            this.element.addEventListener("mouseleave", function() {
             ctx.style.border = "none";
             });
 
