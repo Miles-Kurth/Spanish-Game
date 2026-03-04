@@ -147,8 +147,7 @@ class Card {
             ctx.fillStyle = this.color;
             ctx.beginPath();
             ctx.roundRect(this.x, this.y, this.cardWidth, this.cardHeight, 15);
-            ctx.fill();
-            
+            ctx.fill();            
             
             //Text setup
             this.textMetrics = ctx.measureText(this.word);
