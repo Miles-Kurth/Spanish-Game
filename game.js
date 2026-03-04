@@ -247,7 +247,7 @@ function startGame() {
     }
 
     //Event listeners
-    canvas.addEventListener("click", function(e) {
+    document.getElementsByName("canvas").addEventListener("click", function(e) {
         const rect = gameArea.canvas.getBoundingClientRect();
         const mouseX = e.clientX - rect.left;
         const mouseY = e.clientY - rect.top;
