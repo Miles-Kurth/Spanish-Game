@@ -140,8 +140,11 @@ class Card {
             ctx.roundRect(this.x, this.y, this.cardWidth, this.cardHeight, 15);
             ctx.fill();
             
-            if (mouseOverCard){
-                
+            if (mouseOverCard) {
+                this.element.style.border = "2px solid black";
+            }
+            else {
+                this.element.style.border = "none";
             }
 
             //Text setup
