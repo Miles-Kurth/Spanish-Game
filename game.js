@@ -93,6 +93,7 @@ class Card {
         this.element = document.createElement("canvas");
         this.element.id = cardIndex;
         console.log(this.element.id);
+        document.body.appendChild(this.element);
 
         this.element.addEventListener("mouseenter", function() {
             mouseOverCard = true;
