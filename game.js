@@ -105,7 +105,7 @@ class Card {
         this.wordLength = this.word.length;
 
         this.element.addEventListener('click', function() {
-        console.log('Button was clicked!');
+        console.log("Button " + this.element.id + " was clicked!");
         alert('Button Clicked!');
         });
         
