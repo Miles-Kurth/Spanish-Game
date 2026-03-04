@@ -137,7 +137,7 @@ class Card {
             ctx = gameArea.context;
             this.element.style.borderStyle = "solid";
             this.element.style.borderColor = "black";
-            if (mouseOverCard) {
+            if (mouseOverCard == true) {
                 this.element.style.borderWidth = "5px";
             }
             else {
