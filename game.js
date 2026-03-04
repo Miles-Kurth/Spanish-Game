@@ -104,7 +104,14 @@ class Card {
         this.word = "" + wordsArray[this.wordIndex][this.wordType];
         this.wordLength = this.word.length;
         
-
+        //Card
+        ctx = gameArea.context;
+        this.element.addEventListener("mouseenter", function() {
+            ctx.style.border = "2px solid red";
+            });
+        this.element.addEventListener("mouseleave", function() {
+        ctx.style.border = "none";
+        });
         
         
 
@@ -115,18 +122,12 @@ class Card {
             this.color = new Color("oklch", [this.lightness, this.chroma, this.hue]);
 
             //Draw card
-            ctx = gameArea.context;
             ctx.fillStyle = this.color;
             ctx.beginPath();
             ctx.roundRect(this.x, this.y, this.cardWidth, this.cardHeight, 15);
             ctx.fill();
 
-            this.element.addEventListener("mouseenter", function() {
-            ctx.style.border = "2px solid red";
-            });
-            this.element.addEventListener("mouseleave", function() {
-            ctx.style.border = "none";
-            });
+            
 
 
             //Text setup
