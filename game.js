@@ -103,10 +103,9 @@ class Card {
         wordsArrayAssignments[this.wordIndex][this.wordType] = -1;
         this.word = "" + wordsArray[this.wordIndex][this.wordType];
         this.wordLength = this.word.length;
+        
 
-        // this.element.addEventListener('mouseenter', function() {
-        // ctx.
-        // });
+        
         
 
         //Called every frame
@@ -121,6 +120,14 @@ class Card {
             ctx.beginPath();
             ctx.roundRect(this.x, this.y, this.cardWidth, this.cardHeight, 15);
             ctx.fill();
+
+            this.element.addEventListener('mouseenter', function() {
+            ctx.style.border = "2px solid red";
+            });
+            this.element.addEventListener('mouseleave', function() {
+            ctx.style.border = "none";
+            });
+
 
             //Text setup
             this.textMetrics = ctx.measureText(this.word);
