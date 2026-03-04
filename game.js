@@ -94,15 +94,6 @@ class Card {
         this.element = document.createElement("canvas");
         this.element.id = this.cardIndex;
         console.log(this.element.id);
-        // document.body.appendChild(this.element);
-
-        // this.element.addEventListener("mouseenter", function() {
-        //     mouseOverCard = true;
-        //     console.log(this.cardIndex + " on");
-        // });
-        // this.element.addEventListener("mouseleave", function() {
-        //     mouseOverCard = false;
-        // });
 
         //Size
         this.cardWidth = width;
@@ -163,6 +154,10 @@ class Card {
             ctx.font = "20px monospace";
             ctx.fillText(this.word, this.x + this.cardWidth/2, this.y + this.cardHeight/2 + this.textHeight/2);
         }
+        this.setHoverState = function(b) {
+            this.mouseOverCard = b;
+        }
+
         this.handleClick = function() {
             this.mouseOverCard = !this.mouseOverCard;
             console.log("Card clicked: ", this.word);
@@ -219,10 +214,6 @@ function updateGameArea() {
         }
     }
     updateGlobalHue();
-
-    //Check mouse over cards
-    
-
 }
 
 function updateGlobalHue() {
@@ -270,21 +261,18 @@ function startGame() {
         const rect = gameArea.canvas.getBoundingClientRect();
         const mouseX = e.clientX - rect.left;
         const mouseY = e.clientY - rect.top;
-        let running = true;
         for (let r = 0; r < cardArray.length; r++){
             for (let c = 0; c < cardArray[r].length; c++){
                 let card = cardArray[r][c];
 
                 if (card.containsPoint(mouseX, mouseY)) {
-                    card.mouseOverCard = true;
-                    running = false;
-                    break;
+                    card.setHoverState(true);
+                    return;
                 }
                 else {
-                    card.mouseOverCard = false;
+                    card.setHoverState(false);
                 }
             }
-            if (!running){break;}
         }
     });
 
