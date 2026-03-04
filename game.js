@@ -104,10 +104,9 @@ class Card {
         this.word = "" + wordsArray[this.wordIndex][this.wordType];
         this.wordLength = this.word.length;
 
-        this.element.addEventListener('click', function() {
-        console.log("Button " + this.element.id + " was clicked!");
-        alert('Button Clicked!');
-        });
+        // this.element.addEventListener('mouseenter', function() {
+        // ctx.
+        // });
         
 
         //Called every frame
