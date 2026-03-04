@@ -50,7 +50,7 @@ for (let i = 0; i < wordsArray.length; i++){
 
 
 var startingHue = Math.floor(Math.random() * 360) + 1;
-// var ctx;
+var ctx;
 
 let globalHueChange = 0;
 let time = 0;
@@ -108,7 +108,7 @@ class Card {
         this.ctx = gameArea.context;
         this.element.addEventListener("mouseenter", function() {
             ctx.style.border = "2px solid red";
-            });
+        });
         this.element.addEventListener("mouseleave", function() {
         this.ctx.style.border = "none";
         });
