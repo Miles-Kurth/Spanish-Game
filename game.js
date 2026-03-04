@@ -25,7 +25,20 @@ let wordsArray = [
     [11, "eleven", 0],
     [12, "twelve", 0]
 ];
-let wordsArrayAssignments = [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]];
+let wordsArrayAssignments = [
+                             [0,0],
+                             [0,0],
+                             [0,0],
+                             [0,0],
+                             [0,0],
+                             [0,0],
+                             [0,0],
+                             [0,0],
+                             [0,0],
+                             [0,0],
+                             [0,0],
+                             [0,0]
+                            ];
 for (let i = 0; i < wordsArray.length; i++){
     wordsArrayAssignments[i][0] = wordsArray[i][0];
     wordsArrayAssignments[i][1] = wordsArray[i][1];
@@ -75,9 +88,18 @@ var gameArea = {
 
 class Card {
     constructor(width, height, hue, x, y, cardIndex, row, column) {
+        //Card
+        let mouseOverCard = false;
         this.element = document.createElement("canvas");
         this.element.id = cardIndex;
         console.log(this.element.id);
+
+        this.element.addEventListener("mouseenter", function() {
+            mouseOverCard = true;
+        });
+        this.element.addEventListener("mouseleave", function() {
+            mouseOverCard = false;
+        });
 
         //Size
         this.cardWidth = width;
@@ -104,16 +126,6 @@ class Card {
         this.word = "" + wordsArray[this.wordIndex][this.wordType];
         this.wordLength = this.word.length;
         
-        //Card
-        ctx = gameArea.context;
-        this.element.addEventListener("mouseenter", function() {
-            ctx.style.border = "2px solid red";
-        });
-        this.element.addEventListener("mouseleave", function() {
-        ctx.style.border = "none";
-        });
-        
-        
 
         //Called every frame
         this.update = function(){
@@ -122,13 +134,15 @@ class Card {
             this.color = new Color("oklch", [this.lightness, this.chroma, this.hue]);
 
             //Draw card
+            ctx = gameArea.context;
             ctx.fillStyle = this.color;
             ctx.beginPath();
             ctx.roundRect(this.x, this.y, this.cardWidth, this.cardHeight, 15);
             ctx.fill();
-
             
-
+            if (mouseOverCard){
+                
+            }
 
             //Text setup
             this.textMetrics = ctx.measureText(this.word);
