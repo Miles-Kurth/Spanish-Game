@@ -89,15 +89,16 @@ var gameArea = {
 class Card {
     constructor(width, height, hue, x, y, cardIndex, row, column) {
         //Card
+        this.cardIndex = cardIndex;
         let mouseOverCard = false;
         this.element = document.createElement("canvas");
-        this.element.id = cardIndex;
+        this.element.id = this.cardIndex;
         console.log(this.element.id);
         document.body.appendChild(this.element);
 
         this.element.addEventListener("mouseenter", function() {
             mouseOverCard = true;
-            console.log(this.element.id + " on");
+            console.log(this.cardIndex + " on");
         });
         this.element.addEventListener("mouseleave", function() {
             mouseOverCard = false;
