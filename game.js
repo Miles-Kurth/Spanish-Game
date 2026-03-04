@@ -219,7 +219,25 @@ function updateGameArea() {
         }
     }
     updateGlobalHue();
-    
+
+    //Check mouse over cards
+    let running = true;
+    for (let r = 0; r < cardArray.length; r++){
+        for (let c = 0; c < cardArray[r].length; c++){
+            let card = cardArray[r][c];
+
+            if (card.containsPoint(mouseX, mouseY)) {
+                card.mouseOverCard = true;
+                running = false;
+                break;
+            }
+            else {
+                card.mouseOverCard = false;
+            }
+        }
+        if (!running){break;}
+    }
+
 }
 
 function updateGlobalHue() {
@@ -263,18 +281,15 @@ function startGame() {
             }
         }
     });
+    
 
-}
-
-function getRandomOkLCHColor() {
-  const l = Math.random() * 1;
-  const c = Math.random() * 0.09;
-  const h = (Math.random() * 360) + 1; 
-  
-  return new Color("oklch", [l, c, h]);
 }
 
 startGame();
+
+
+
+
 
 /*TO-DO
 - Detect mouse over, highlight card
@@ -284,7 +299,13 @@ startGame();
 
 
 
-
+// function getRandomOkLCHColor() {
+//   const l = Math.random() * 1;
+//   const c = Math.random() * 0.09;
+//   const h = (Math.random() * 360) + 1; 
+  
+//   return new Color("oklch", [l, c, h]);
+// }
 
 /*
 function startGame() {
