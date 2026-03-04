@@ -219,7 +219,7 @@ function updateGameArea() {
         }
     }
     updateGlobalHue();
-    this.canvas.addEventListener("click", function(e) {
+    gameArea.addEventListener("click", function(e) {
         const rect = gameArea.canvas.getBoundingClientRect();
         const mouseX = e.clientX - rect.left;
         const mouseY = e.clientY - rect.top;
