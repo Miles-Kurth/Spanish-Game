@@ -89,8 +89,9 @@ var gameArea = {
 class Card {
     constructor(width, height, hue, x, y, cardIndex, row, column) {
         //Card
+        this.mouseOverCard = false;
+
         this.cardIndex = cardIndex;
-        let mouseOverCard = false;
         this.element = document.createElement("canvas");
         this.element.id = this.cardIndex;
         console.log(this.element.id);
@@ -129,19 +130,17 @@ class Card {
 
             //Draw card
             ctx = gameArea.context;
-            this.element.style.borderStyle = "solid";
-            this.element.style.borderColor = "black";
-            if (mouseOverCard == true) {
-                this.element.style.borderWidth = "5px";
-            }
-            else {
-                this.element.style.borderWidth = "0px";
-            }
-
             ctx.fillStyle = this.color;
             ctx.beginPath();
             ctx.roundRect(this.x, this.y, this.cardWidth, this.cardHeight, 15);
-            ctx.fill();            
+            ctx.fill();  
+
+            if (mouseOverCard) {
+                ctx.lineWidth = 5;
+                ctx.strokeStyle = "black";
+                ctx.stroke();
+            }
+
             
             //Text setup
             this.textMetrics = ctx.measureText(this.word);
@@ -258,7 +257,7 @@ function startGame() {
             }
         }
     });
-    gameArea.canvas.addEventListener("mouseover", function(e) {
+    gameArea.canvas.addEventListener("mousemove", function(e) {
         const rect = gameArea.canvas.getBoundingClientRect();
         const mouseX = e.clientX - rect.left;
         const mouseY = e.clientY - rect.top;
