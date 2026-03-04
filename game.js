@@ -96,6 +96,7 @@ class Card {
 
         this.element.addEventListener("mouseenter", function() {
             mouseOverCard = true;
+            console.log(this.element.id + " on");
         });
         this.element.addEventListener("mouseleave", function() {
             mouseOverCard = false;
