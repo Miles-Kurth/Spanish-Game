@@ -135,18 +135,21 @@ class Card {
 
             //Draw card
             ctx = gameArea.context;
+            this.element.style.borderStyle = "solid";
+            this.element.style.borderColor = "black";
+            if (mouseOverCard) {
+                this.element.style.borderWidth = "5px";
+            }
+            else {
+                this.element.style.borderWidth = "0px";
+            }
+
             ctx.fillStyle = this.color;
             ctx.beginPath();
             ctx.roundRect(this.x, this.y, this.cardWidth, this.cardHeight, 15);
             ctx.fill();
             
-            if (mouseOverCard) {
-                this.element.style.border = "2px solid black";
-            }
-            else {
-                this.element.style.border = "none";
-            }
-
+            
             //Text setup
             this.textMetrics = ctx.measureText(this.word);
             this.textHeight = this.textMetrics.actualBoundingBoxAscent + this.textMetrics.actualBoundingBoxDescent;
