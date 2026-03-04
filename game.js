@@ -221,25 +221,7 @@ function updateGameArea() {
     updateGlobalHue();
 
     //Check mouse over cards
-    const rect = gameArea.canvas.getBoundingClientRect();
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    let running = true;
-    for (let r = 0; r < cardArray.length; r++){
-        for (let c = 0; c < cardArray[r].length; c++){
-            let card = cardArray[r][c];
-
-            if (card.containsPoint(mouseX, mouseY)) {
-                card.mouseOverCard = true;
-                running = false;
-                break;
-            }
-            else {
-                card.mouseOverCard = false;
-            }
-        }
-        if (!running){break;}
-    }
+    
 
 }
 
@@ -284,7 +266,27 @@ function startGame() {
             }
         }
     });
-    
+    gameArea.canvas.addEventListener("mouseover", function(e) {
+        const rect = gameArea.canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+        let running = true;
+        for (let r = 0; r < cardArray.length; r++){
+            for (let c = 0; c < cardArray[r].length; c++){
+                let card = cardArray[r][c];
+
+                if (card.containsPoint(mouseX, mouseY)) {
+                    card.mouseOverCard = true;
+                    running = false;
+                    break;
+                }
+                else {
+                    card.mouseOverCard = false;
+                }
+            }
+            if (!running){break;}
+        }
+    });
 
 }
 
