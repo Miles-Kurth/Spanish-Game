@@ -219,22 +219,7 @@ function updateGameArea() {
         }
     }
     updateGlobalHue();
-    gameArea.addEventListener("click", function(e) {
-        const rect = gameArea.canvas.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
-
-        for (let r = 0; r < cardArray.length; r++){
-            for (let c = 0; c < cardArray[r].length; c++){
-                let card = cardArray[r][c];
-
-                if (card.containsPoint(mouseX, mouseY)) {
-                    card.handleClick();
-                    return; // stop after first hit
-                }
-            }
-        }
-    });
+    
 }
 
 function updateGlobalHue() {
@@ -260,6 +245,25 @@ function startGame() {
       cardArray.push(arrayRow);
       targetY += cardHeight + 10;
     }
+
+    //Event listeners
+    gameArea.addEventListener("click", function(e) {
+        const rect = gameArea.canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        for (let r = 0; r < cardArray.length; r++){
+            for (let c = 0; c < cardArray[r].length; c++){
+                let card = cardArray[r][c];
+
+                if (card.containsPoint(mouseX, mouseY)) {
+                    card.handleClick();
+                    return; // stop after first hit
+                }
+            }
+        }
+    });
+
 }
 
 function getRandomOkLCHColor() {
