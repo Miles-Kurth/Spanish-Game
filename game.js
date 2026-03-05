@@ -264,6 +264,7 @@ function startGame() {
             for (let c = 0; c < cardArray[r].length; c++){
                 let card = cardArray[r][c];
 
+                card.setHoverState(false);
                 if (card.containsPoint(mouseX, mouseY)) {
                     card.setHoverState(true);
                     return;
