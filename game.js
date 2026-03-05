@@ -211,11 +211,13 @@ class Card {
             console.log("Card clicked: ", this.word);
             this.isSelected = !this.isSelected;
 
-            if (selectedCards.length > 0){ //If selectedCards isn't empty and doesn't contain this card, add this card to selectedCards
-                if (!this.checkSelected()){
-                    selectedCards.push(this.element);
-                }
+            if (!this.checkSelected()){
+                selectedCards.push(this.element);
             }
+
+            // if (selectedCards.length > 0){ //If selectedCards isn't empty and doesn't contain this card, add this card to selectedCards
+                
+            // }
 
 
             
