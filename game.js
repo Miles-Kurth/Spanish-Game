@@ -364,6 +364,7 @@ startGame();
 
 /*TO-DO
 - Make the cards hide when correctly paired
+- Issue may be "selectedCards[0].isHidden = true"
 */
 
 
