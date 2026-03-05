@@ -127,6 +127,13 @@ class Card {
                 ctx.strokeStyle = "white";
                 ctx.stroke();
             }
+            if (this.isSelected) {
+                this.lightness = 0.72;
+                this.chroma = 0.121;
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = "black";
+                ctx.stroke();
+            }
 
             //Text setup
             this.textMetrics = ctx.measureText(this.word);
@@ -188,10 +195,14 @@ class Card {
             // this.mouseOverCard = !this.mouseOverCard;
             console.log("Card clicked: ", this.word);
             this.isSelected = !this.isSelected;
-            if (selectedCards.length > 0){
+
+            if (selectedCards.length > 0){ //If selectedCards isn't empty and doesn't contain this card, add this card to selectedCards
                 if (!this.checkSelected()){
                     selectedCards.push();
                 }
+            }
+            while (selectedCards.length > 2){ //Cap at length 2
+                selectedCards.pop();
             }
         }
         this.checkSelected = function() {
@@ -209,9 +220,6 @@ class Card {
 }
 
 function updateGameArea() {
-    while (selectedCards.length > 2){
-        selectedCards.pop();
-    }
     gameArea.clear();
     for (let r = 0; r < cardArray.length; r++){
         for (let c = 0; c < cardArray[r].length; c++){
