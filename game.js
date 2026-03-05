@@ -213,7 +213,7 @@ class Card {
 
             if (selectedCards.length > 0){ //If selectedCards isn't empty and doesn't contain this card, add this card to selectedCards
                 if (!this.checkSelected()){
-                    selectedCards.push();
+                    selectedCards.push(this.element);
                 }
             }
 
@@ -285,6 +285,7 @@ function startGame() {
 
                 if (card.containsPoint(mouseX, mouseY)) {
                     card.handleClick();
+                    console.log(selectedCards.length);
 
                     if (selectedCards.length >= 2){
                         if (checkCards()){
