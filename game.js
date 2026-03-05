@@ -260,16 +260,17 @@ function startGame() {
         const rect = gameArea.canvas.getBoundingClientRect();
         const mouseX = e.clientX - rect.left;
         const mouseY = e.clientY - rect.top;
+
+        let foundHover = false;
+
         for (let r = 0; r < cardArray.length; r++){
             for (let c = 0; c < cardArray[r].length; c++){
                 let card = cardArray[r][c];
 
-                card.setHoverState(false);
-                if (card.containsPoint(mouseX, mouseY)) {
+                if (!foundHover && card.containsPoint(mouseX, mouseY)) {
                     card.setHoverState(true);
-                    return;
-                }
-                else {
+                    foundHover = true; // only first card gets hover
+                } else {
                     card.setHoverState(false);
                 }
             }
