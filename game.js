@@ -300,6 +300,7 @@ function startGame() {
                     if (selectedCards.length >= 2){
                         if (checkCards()){
                             selectedCards[0].isHidden = true;
+                            selectedCards[1].isHidden = true;
                         }
                         selectedCards.length = 0;
                     }
@@ -362,7 +363,7 @@ startGame();
 
 
 /*TO-DO
-- 
+- Make the cards hide when correctly paired
 */
 
 
