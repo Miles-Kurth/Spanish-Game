@@ -1,5 +1,4 @@
 GAME FOR SPANISH CLASS.
 
-Link:
-
+Link: 
 https://miles-kurth.github.io/Spanish-Game/
