@@ -145,6 +145,14 @@ class Card {
                     ctx.stroke();
                 }
             }
+            if (this.isHidden){
+                this.lightness = 0.97;
+                this.chroma = 0.01;
+                ctx.beginPath();
+                ctx.roundRect(this.x, this.y, this.cardWidth, this.cardHeight, 15);
+                ctx.fill(); 
+            }
+            
             
 
             
@@ -291,7 +299,7 @@ function startGame() {
 
                     if (selectedCards.length >= 2){
                         if (checkCards()){
-                            selectedCards[0].hideCard();
+                            selectedCards[0].isHidden = true;
                         }
                         selectedCards.length = 0;
                     }
