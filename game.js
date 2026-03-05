@@ -44,21 +44,7 @@ for (let i = 0; i < wordsArray.length; i++){
     wordsArrayAssignments[i][1] = wordsArray[i][1];
 }
 
-
-// let wordsArrayAssignments = [
-//     [1 , "one"   ],
-//     [2 , "two"   ],
-//     [3 , "three" ],
-//     [4 , "four"  ],
-//     [5 , "five"  ],
-//     [6 , "six"   ],
-//     [7 , "seven" ],
-//     [8 , "eight" ],
-//     [9 , "nine"  ],
-//     [10, "ten"   ],
-//     [11, "eleven"],
-//     [12, "twelve"]
-// ];
+let selectedCards = [];
 
 
 
@@ -90,6 +76,7 @@ class Card {
     constructor(width, height, hue, x, y, cardIndex, row, column) {
         //Card
         this.mouseOverCard = false;
+        this.isSelected = false;
 
         this.cardIndex = cardIndex;
         this.element = document.createElement("canvas");
@@ -152,15 +139,6 @@ class Card {
             ctx.font = "20px monospace";
             ctx.fillText(this.word, this.x + this.cardWidth/2, this.y + this.cardHeight/2 + this.textHeight/2);
         }
-        this.setHoverState = function(b) {
-            this.mouseOverCard = b;
-            // console.log("Card: ", this.word);
-        }
-
-        this.handleClick = function() {
-            // this.mouseOverCard = !this.mouseOverCard;
-            console.log("Card clicked: ", this.word);
-        }
 
         this.containsPoint = function(px, py) {
             const r = 15; // same radius you use in roundRect
@@ -169,12 +147,12 @@ class Card {
             const w = this.cardWidth;
             const h = this.cardHeight;
 
-            // 1️⃣ First: quick reject (outside bounding box)
+            // First: quick reject (outside bounding box)
             if (px < x || px > x + w || py < y || py > y + h) {
                 return false;
             }
 
-            // 2️⃣ Check central rectangle (no corner areas)
+            // Check central rectangle (no corner areas)
             if (
                 (px >= x + r && px <= x + w - r) ||
                 (py >= y + r && py <= y + h - r)
@@ -182,7 +160,7 @@ class Card {
                 return true;
             }
 
-            // 3️⃣ Check the four corner circles
+            // Check the four corner circles
             const corners = [
                 { cx: x + r,     cy: y + r },         // top-left
                 { cx: x + w - r, cy: y + r },         // top-right
@@ -199,13 +177,41 @@ class Card {
             }
 
             return false;
-        };
+        }
+
+        this.setHoverState = function(b) {
+            this.mouseOverCard = b;
+            // console.log("Card: ", this.word);
+        }
+
+        this.handleClick = function() {
+            // this.mouseOverCard = !this.mouseOverCard;
+            console.log("Card clicked: ", this.word);
+            this.isSelected = !this.isSelected;
+            if (selectedCards.length > 0){
+                if (!this.checkSelected()){
+                    selectedCards.push();
+                }
+            }
+        }
+        this.checkSelected = function() {
+            for (let i = 0; i < selectedCards.length; i++) {
+                if (selectedCards[i] == this.element){
+                    return true;
+                }
+            }
+            return false;
+        }
+
     
     
     }
 }
 
 function updateGameArea() {
+    while (selectedCards.length > 2){
+        selectedCards.pop();
+    }
     gameArea.clear();
     for (let r = 0; r < cardArray.length; r++){
         for (let c = 0; c < cardArray[r].length; c++){
@@ -286,8 +292,7 @@ startGame();
 
 
 /*TO-DO
-- Detect mouse over, highlight card
-- Detect click
+- 
 */
 
 
