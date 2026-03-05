@@ -12,18 +12,18 @@ const cardHeight = ((canvasHeight - 10) - (numRows * 10)) / numRows;
 let cardArray = [];
 
 let wordsArray = [
-    [1 , "one"   , 0],
-    [2 , "two"   , 0],
-    [3 , "three" , 0],
-    [4 , "four"  , 0],
-    [5 , "five"  , 0],
-    [6 , "six"   , 0],
-    [7 , "seven" , 0],
-    [8 , "eight" , 0],
-    [9 , "nine"  , 0],
-    [10, "ten"   , 0],
-    [11, "eleven", 0],
-    [12, "twelve", 0]
+    ["1" , "one"   , 0],
+    ["2" , "two"   , 0],
+    ["3" , "three" , 0],
+    ["4" , "four"  , 0],
+    ["5" , "five"  , 0],
+    ["6" , "six"   , 0],
+    ["7" , "seven" , 0],
+    ['8' , "eight" , 0],
+    ["9" , "nine"  , 0],
+    ["10", "ten"   , 0],
+    ["11", "eleven", 0],
+    ["12", "twelve", 0]
 ];
 let wordsArrayAssignments = [
                              [0,0],
@@ -122,28 +122,30 @@ class Card {
             if (!this.isHidden){
                 this.lightness = 0.8;
                 this.chroma = 0.09;
-            }
-            if (!this.isSelected){ //not selected
+
+                if (!this.isSelected){ //not selected
                 ctx.beginPath();
                 ctx.roundRect(this.x, this.y, this.cardWidth, this.cardHeight, 15);
                 ctx.fill();  
-            }
-            else { //selected
-                this.lightness = 0.72;
-                this.chroma = 0.121;
-                ctx.beginPath();
-                ctx.roundRect(this.x + 2, this.y + 2, this.cardWidth - 4, this.cardHeight - 4, 15);
-                ctx.fill();
-                ctx.lineWidth = 2;
-                ctx.strokeStyle = "black";
-                ctx.stroke();
+                }
+                else { //selected
+                    this.lightness = 0.72;
+                    this.chroma = 0.121;
+                    ctx.beginPath();
+                    ctx.roundRect(this.x + 2, this.y + 2, this.cardWidth - 4, this.cardHeight - 4, 15);
+                    ctx.fill();
+                    ctx.lineWidth = 2;
+                    ctx.strokeStyle = "black";
+                    ctx.stroke();
+                }
+                
+                if (this.mouseOverCard && !this.isSelected) {
+                    ctx.lineWidth = 3;
+                    ctx.strokeStyle = "white";
+                    ctx.stroke();
+                }
             }
             
-            if (this.mouseOverCard && !this.isSelected) {
-                ctx.lineWidth = 3;
-                ctx.strokeStyle = "white";
-                ctx.stroke();
-            }
 
             
             
@@ -214,9 +216,9 @@ class Card {
                     selectedCards.push();
                 }
             }
-            while (selectedCards.length > 2){ //Cap at length 2
-                selectedCards.pop();
-            }
+
+
+            
         }
         this.checkSelected = function() {
             for (let i = 0; i < selectedCards.length; i++) {
@@ -226,7 +228,12 @@ class Card {
             }
             return false;
         }
-
+        
+        this.hideCard = function() {
+            this.isHidden = true;
+            this.lightness = 0.97;
+            this.chroma = 0.01;
+        }
     
     
     }
@@ -278,6 +285,14 @@ function startGame() {
 
                 if (card.containsPoint(mouseX, mouseY)) {
                     card.handleClick();
+
+                    if (selectedCards.length >= 2){
+                        if (checkCards()){
+                            selectedCards[0].hideCard();
+                        }
+                        selectedCards.length = 0;
+                    }
+
                     return; // stop after first hit
                 }
             }
@@ -304,6 +319,29 @@ function startGame() {
         }
     });
 
+}
+
+function checkCards() {
+    let rowOne = 0;
+    let rowTwo = 0;
+    for (let i = 0; i < wordsArray.length; i++){ //first card
+        for (let j = 0; j < 2; j++){
+            if (selectedCards[0] === wordsArray[i][j]){
+                rowOne = i;
+            }
+        }
+    }
+    for (let i = 0; i < wordsArray.length; i++){ //second card
+        for (let j = 0; j < 2; j++){
+            if (selectedCards[1] === wordsArray[i][j]){
+                rowTwo = i;
+            }
+        }
+    }
+    if (rowOne == rowTwo){
+        return true;
+    }
+    return false;
 }
 
 startGame();
