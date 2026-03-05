@@ -77,6 +77,7 @@ class Card {
         //Card
         this.mouseOverCard = false;
         this.isSelected = false;
+        this.isHidden = false;
 
         this.cardIndex = cardIndex;
         this.element = document.createElement("canvas");
@@ -121,15 +122,23 @@ class Card {
             ctx.beginPath();
             ctx.roundRect(this.x, this.y, this.cardWidth, this.cardHeight, 15);
             ctx.fill();  
-
+            
             if (this.mouseOverCard) {
                 ctx.lineWidth = 3;
                 ctx.strokeStyle = "white";
                 ctx.stroke();
             }
+
+            if (!this.isHidden){
+                this.lightness = 0.8;
+                this.chroma = 0.09;
+            }
             if (this.isSelected) {
                 this.lightness = 0.72;
                 this.chroma = 0.121;
+                ctx.beginPath();
+                ctx.roundRect(this.x + 2, this.y + 2, this.cardWidth - 4, this.cardHeight - 4, 15);
+                ctx.fill();
                 ctx.lineWidth = 2;
                 ctx.strokeStyle = "black";
                 ctx.stroke();
