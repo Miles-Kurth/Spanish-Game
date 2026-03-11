@@ -1,5 +1,7 @@
 import Color from "https://colorjs.io/dist/color.js";
 
+let gameCanStart = false;
+
 const canvasWidth = 1280 + 10;
 const canvasHeight = 570 + 10;
       
@@ -274,9 +276,7 @@ function updateGameArea() {
             cardArray[r][c].update();
         }
     }
-    updateGlobalHue();
-
-    
+    updateGlobalHue();    
 }
 
 function updateGlobalHue() {
@@ -357,6 +357,8 @@ function startGame() {
         }
     });
 
+    updateGameArea();
+    gameCanStart = true;
 }
 
 function checkCards() {
