@@ -111,7 +111,7 @@ class Card {
         
 
         //Called every frame
-        this.update = function(){
+        this.update = function() {
             //Color
             this.hue = ( (this.hue) % 360 ) - 0.25 - globalHueChange;
             this.color = new Color("oklch", [this.lightness, this.chroma, this.hue]);
@@ -119,14 +119,15 @@ class Card {
             //Draw card
             ctx = gameArea.context;
             ctx.fillStyle = this.color;
-            if (!this.isHidden){
+
+            if (!this.isHidden){ //if visible
                 this.lightness = 0.8;
                 this.chroma = 0.09;
 
                 if (!this.isSelected){ //not selected
-                ctx.beginPath();
-                ctx.roundRect(this.x, this.y, this.cardWidth, this.cardHeight, 15);
-                ctx.fill();  
+                    ctx.beginPath();
+                    ctx.roundRect(this.x, this.y, this.cardWidth, this.cardHeight, 15);
+                    ctx.fill();  
                 }
                 else { //selected
                     this.lightness = 0.72;
@@ -169,6 +170,9 @@ class Card {
             ctx.font = "20px monospace";
             ctx.fillText(this.word, this.x + this.cardWidth/2, this.y + this.cardHeight/2 + this.textHeight/2);
         }
+
+        this.getWordIndex = function() { return this.wordIndex; }
+        this.getWordType = function() { return this.wordType; }
 
         this.containsPoint = function(px, py) {
             const r = 15; // same radius you use in roundRect
@@ -334,6 +338,11 @@ function startGame() {
 }
 
 function checkCards() {
+    if (selectedCards[0].getWordIndex() == selectedCards[1].getWordIndex()){
+        return true;
+    }
+    return false;
+
     let rowOne = 0;
     let rowTwo = 0;
     for (let i = 0; i < wordsArray.length; i++){ //first card
