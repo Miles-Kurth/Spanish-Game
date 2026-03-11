@@ -219,9 +219,21 @@ class Card {
         }
 
         this.handleClick = function() {
-            // this.mouseOverCard = !this.mouseOverCard;
             console.log("Card clicked: ", this.word);
             this.isSelected = !this.isSelected;
+
+            if (this.isSelected){ //should be there
+                selectedCards.push(this.element); //add
+            }
+            else if (!this.isSelected){ //should not be there
+                for (let i = 0; i < selectedCards.length; i++){
+                    if (selectedCards[i] === this.element){
+                        selectedCards.splice(i, 1); //remove
+                    }
+                }
+            }
+            return;
+
 
             if (this.checkSelected()){
                 for (let i = 0; i < selectedCards.length; i++){
@@ -233,12 +245,6 @@ class Card {
             else if (!this.checkSelected()){
                 selectedCards.push(this.element);
             }
-
-            // if (selectedCards.length > 0){ //If selectedCards isn't empty and doesn't contain this card, add this card to selectedCards
-                
-            // }
-
-
             
         }
         this.checkSelected = function() {
@@ -315,6 +321,8 @@ function startGame() {
                         if (checkCards()){
                             selectedCards[0].isHidden = true;
                             selectedCards[1].isHidden = true;
+                            console.log(selectedCards[0].isHidden);
+                            console.log(selectedCards[1].isHidden);
                             console.log("cards hidden");
                         }
                         selectedCards.length = 0;
@@ -349,35 +357,7 @@ function startGame() {
 }
 
 function checkCards() {
-    // selectedCards.forEach(function(obj) {
-    //     if (obj.getWordIndex() == obj.getWordIndex()){
-    //         return true;
-    //     }
-    // });
-    // return false;
-
-    if (selectedCards[0].wordIndex == selectedCards[1].wordIndex){
-        return true;
-    }
-    return false;
-
-    let rowOne = 0;
-    let rowTwo = 0;
-    for (let i = 0; i < wordsArray.length; i++){ //first card
-        for (let j = 0; j < 2; j++){
-            if (selectedCards[0] === wordsArray[i][j]){
-                rowOne = i;
-            }
-        }
-    }
-    for (let i = 0; i < wordsArray.length; i++){ //second card
-        for (let j = 0; j < 2; j++){
-            if (selectedCards[1] === wordsArray[i][j]){
-                rowTwo = i;
-            }
-        }
-    }
-    if (rowOne == rowTwo){
+    if (selectedCards[0].wordIndex === selectedCards[1].wordIndex){
         return true;
     }
     return false;
