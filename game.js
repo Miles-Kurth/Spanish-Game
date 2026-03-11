@@ -171,8 +171,8 @@ class Card {
             ctx.fillText(this.word, this.x + this.cardWidth/2, this.y + this.cardHeight/2 + this.textHeight/2);
         }
 
-        this.getWordIndex = function() { return this.wordIndex; }
-        this.getWordType = function() { return this.wordType; }
+        this.getWordIndex = function() { return (this.wordIndex); }
+        this.getWordType = function() { return (this.wordType); }
 
         this.containsPoint = function(px, py) {
             const r = 15; // same radius you use in roundRect
@@ -223,7 +223,14 @@ class Card {
             console.log("Card clicked: ", this.word);
             this.isSelected = !this.isSelected;
 
-            if (!this.checkSelected()){
+            if (this.checkSelected()){
+                for (let i = 0; i < selectedCards.length; i++){
+                    if (selectedCards[i] === this.element){
+                        selectedCards.splice(i, 1);
+                    }
+                }
+            }
+            else if (!this.checkSelected()){
                 selectedCards.push(this.element);
             }
 
@@ -236,7 +243,7 @@ class Card {
         }
         this.checkSelected = function() {
             for (let i = 0; i < selectedCards.length; i++) {
-                if (selectedCards[i] == this.element){
+                if (selectedCards[i] === this.element){
                     return true;
                 }
             }
@@ -245,6 +252,7 @@ class Card {
         
         this.hideCard = function() {
             this.isHidden = true;
+            this.isSelected = false;
             this.lightness = 0.97;
             this.chroma = 0.01;
         }
@@ -262,13 +270,7 @@ function updateGameArea() {
     }
     updateGlobalHue();
 
-    if (selectedCards.length >= 2){
-        if (checkCards()){
-            selectedCards[0].isHidden = true;
-            selectedCards[1].isHidden = true;
-        }
-        selectedCards.length = 0;
-    }
+    
 }
 
 function updateGlobalHue() {
@@ -309,6 +311,14 @@ function startGame() {
                     card.handleClick();
                     console.log(selectedCards.length);
 
+                    if (selectedCards.length >= 2){
+                        if (checkCards()){
+                            selectedCards[0].isHidden = true;
+                            selectedCards[1].isHidden = true;
+                        }
+                        selectedCards.length = 0;
+                    }
+
                     return; // stop after first hit
                 }
             }
@@ -338,6 +348,13 @@ function startGame() {
 }
 
 function checkCards() {
+    // selectedCards.forEach(function(obj) {
+    //     if (obj.getWordIndex() == obj.getWordIndex()){
+    //         return true;
+    //     }
+    // });
+    // return false;
+
     if (selectedCards[0].getWordIndex() == selectedCards[1].getWordIndex()){
         return true;
     }
