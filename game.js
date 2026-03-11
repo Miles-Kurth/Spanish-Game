@@ -359,6 +359,7 @@ function startGame() {
 
     updateGameArea();
     gameCanStart = true;
+    console.log("STARTING");
 }
 
 function checkCards() {
