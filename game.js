@@ -355,7 +355,7 @@ function checkCards() {
     // });
     // return false;
 
-    if (selectedCards[0].getWordIndex() == selectedCards[1].getWordIndex()){
+    if (selectedCards[0].wordIndex == selectedCards[1].wordIndex){
         return true;
     }
     return false;
