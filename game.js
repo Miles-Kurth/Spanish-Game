@@ -315,6 +315,7 @@ function startGame() {
                         if (checkCards()){
                             selectedCards[0].isHidden = true;
                             selectedCards[1].isHidden = true;
+                            console.log("cards hidden");
                         }
                         selectedCards.length = 0;
                     }
