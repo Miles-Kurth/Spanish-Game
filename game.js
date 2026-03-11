@@ -305,33 +305,35 @@ function startGame() {
 
     //Event listeners
     gameArea.canvas.addEventListener("click", function(e) {
-        const rect = gameArea.canvas.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
+        if (gameCanStart){
+            const rect = gameArea.canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
 
-        for (let r = 0; r < cardArray.length; r++){
-            for (let c = 0; c < cardArray[r].length; c++){
-                let card = cardArray[r][c];
+            for (let r = 0; r < cardArray.length; r++){
+                for (let c = 0; c < cardArray[r].length; c++){
+                    let card = cardArray[r][c];
 
-                if (card.containsPoint(mouseX, mouseY)) {
-                    card.handleClick();
-                    console.log(selectedCards.length);
+                    if (card.containsPoint(mouseX, mouseY)) {
+                        card.handleClick();
+                        console.log(selectedCards.length);
 
-                    if (selectedCards.length >= 2){
-                        if (checkCards()){
-                            for (let i = 0; i < 2; i++){
-                                let cardObj = selectedCards[i];
-                                cardObj.hideCard();
+                        if (selectedCards.length >= 2){
+                            if (checkCards()){
+                                for (let i = 0; i < 2; i++){
+                                    let cardObj = selectedCards[i];
+                                    cardObj.hideCard();
+                                }
+
+                                console.log(selectedCards[0].isHidden);
+                                console.log(selectedCards[1].isHidden);
+                                console.log("cards hidden");
                             }
-
-                            console.log(selectedCards[0].isHidden);
-                            console.log(selectedCards[1].isHidden);
-                            console.log("cards hidden");
+                            selectedCards.length = 0;
                         }
-                        selectedCards.length = 0;
-                    }
 
-                    return; // stop after first hit
+                        return; // stop after first hit
+                    }
                 }
             }
         }
