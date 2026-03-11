@@ -257,6 +257,14 @@ function updateGameArea() {
         }
     }
     updateGlobalHue();
+
+    if (selectedCards.length >= 2){
+        if (checkCards()){
+            selectedCards[0].isHidden = true;
+            selectedCards[1].isHidden = true;
+        }
+        selectedCards.length = 0;
+    }
 }
 
 function updateGlobalHue() {
@@ -296,14 +304,6 @@ function startGame() {
                 if (card.containsPoint(mouseX, mouseY)) {
                     card.handleClick();
                     console.log(selectedCards.length);
-
-                    if (selectedCards.length >= 2){
-                        if (checkCards()){
-                            selectedCards[0].isHidden = true;
-                            selectedCards[1].isHidden = true;
-                        }
-                        selectedCards.length = 0;
-                    }
 
                     return; // stop after first hit
                 }
